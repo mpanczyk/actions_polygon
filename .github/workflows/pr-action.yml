@@ -20,7 +20,7 @@ jobs:
     - name: update-pull-request
       uses: kt3k/update-pr-description@v2
       with:
-        pr_body: ${{ steps.description.outputs.description }}
+        pr_body: "Updated PR description"
         destination_branch: release
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
