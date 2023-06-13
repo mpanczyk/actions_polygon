@@ -1,0 +1,26 @@
+name: Creates and Updates PR
+on:
+  push:
+    branches:
+    - master
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: create-description
+      run: "date"
+      id: description
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        destination_branch: release
+        pr_title: Release
+    - name: update-pull-request
+      uses: kt3k/update-pr-description@v2
+      with:
+        pr_body: ${{ steps.description.outputs.description }}
+        destination_branch: release
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
